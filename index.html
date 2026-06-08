@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Burger Restaurant card</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #0f0f0f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Card */
+.coupon {
+  width: 330px;
+  background: #111;
+  color: white;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 25px rgba(0,255,255,0.3);
+  transition: 0.3s;
+}
+
+.coupon:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 40px cyan;
+}
+
+/* Ticket holes */
+.coupon::before,
+.coupon::after {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: #0f0f0f;
+  border-radius: 50%;
+  left: -15px;
+}
+.coupon::before { top: 120px; }
+.coupon::after { bottom: 120px; }
+
+/* Header */
+.header {
+  padding: 15px;
+  text-align: center;
+  background: linear-gradient(90deg, cyan, blue);
+}
+
+/* Image */
+.image img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+/* Body */
+.body {
+  padding: 15px;
+  text-align: center;
+}
+
+.offer {
+  color: cyan;
+  font-size: 22px;
+}
+
+/* Promo Code */
+.code {
+  margin: 15px auto;
+  padding: 10px;
+  border: 2px dashed cyan;
+  display: inline-block;
+  letter-spacing: 2px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.code:hover {
+  background: cyan;
+  color: black;
+}
+
+/* Button */
+.btn {
+  margin-top: 15px;
+  padding: 12px 25px;
+  border: 2px solid cyan;
+  background: transparent;
+  color: cyan;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 100%;
+  background: cyan;
+  left: 0;
+  top: 0;
+  transition: 0.4s;
+  z-index: -1;
+}
+
+.btn:hover::before {
+  width: 100%;
+}
+
+.btn:hover {
+  color: black;
+}
+
+/* Popup */
+.popup {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: cyan;
+  color: black;
+  padding: 10px 15px;
+  border-radius: 8px;
+  display: none;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="coupon">
+
+  <div class="header">
+    <h3>🍔 Burger Restaurant</h3>
+  </div>
+
+  <div class="image">
+    <img src="assets/images/images5.jpg" alt="Burger">
+  </div>
+
+  <div class="body">
+    <div class="offer">20% OFF</div>
+
+    <p>Delicious Burger Near Surjani North Karachi. Only Rs. 400!</p>
+
+    <div class="code" onclick="copyCode()">BOH232</div>
+
+    <br>
+
+    <button class="btn" onclick="orderNow()">Order Now</button>
+  </div>
+
+</div>
+
+<!-- Popup -->
+<div class="popup" id="popup"></div>
+
+<script>
+function showPopup(message) {
+  const popup = document.getElementById("popup");
+  popup.innerText = message;
+  popup.style.display = "block";
+
+  setTimeout(() => {
+    popup.style.display = "none";
+  }, 2000);
+}
+
+/* Copy Promo Code */
+function copyCode() {
+  navigator.clipboard.writeText("BOH232");
+  showPopup("Promo Code Copied!");
+}
+
+/* Order Button */
+function orderNow() {
+  showPopup("Order Placed Successfully 🍔");
+}
+</script>
+
+</body>
+</html>
