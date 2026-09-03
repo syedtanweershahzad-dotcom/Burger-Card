@@ -1,20 +1,42 @@
+document.addEventListener('DOMContentLoaded', () => {
+  const promoCodeElem = document.getElementById('promoCode');
+  const orderBtnElem = document.getElementById('orderBtn');
+
+  if (promoCodeElem) {
+    promoCodeElem.addEventListener('click', copyCode);
+  }
+
+  if (orderBtnElem) {
+    orderBtnElem.addEventListener('click', orderNow);
+  }
+});
+
+let popupTimeout;
+
 function showPopup(message) {
-  const popup = document.getElementById("popup");
+  const popup = document.getElementById('popup');
+  if (!popup) return;
+
   popup.innerText = message;
-  popup.style.display = "block";
+  popup.style.display = 'block';
 
-  setTimeout(() => {
-    popup.style.display = "none";
-  }, 2000);
+  clearTimeout(popupTimeout);
+  popupTimeout = setTimeout(() => {
+    popup.style.display = 'none';
+  }, 2500);
 }
 
-/* Copy Promo Code */
 function copyCode() {
-  navigator.clipboard.writeText("BOH232");
-  showPopup("Promo Code Copied!");
+  const codeText = document.getElementById('promoCode').innerText;
+  navigator.clipboard.writeText(codeText)
+    .then(() => {
+      showPopup('Promo code copied!');
+    })
+    .catch(() => {
+      showPopup('Failed to copy code');
+    });
 }
 
-/* Order Button */
 function orderNow() {
-  showPopup("Order Placed Successfully 🍔");
+  showPopup('Redirecting to order page...');
 }
